@@ -20,3 +20,10 @@ For devs:
 
 You can manually copy bundle.js content to cockpit console to test   
 `npm run start` to run devserver
+
+```
+fetch("https://raw.githubusercontent.com/arch-khadi/camunda-utils/main/camunda-utils.js")
+    .then(response => response.text())
+    .then(text => eval(text))
+```
+
