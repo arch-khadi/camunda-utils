@@ -11,6 +11,7 @@ export class CamundaService {
         processDefinitionId: string | undefined = undefined,
         processDefinitionKey: string | undefined = undefined
     ): Promise<any[]> {
+        let preUrl = ADDRESS();
         if (!processDefinitionId && !processDefinitionKey) throw "processDefinitionId processDefinitionKey is empty";
         const requestOptions = {
             method: 'get',
@@ -19,9 +20,9 @@ export class CamundaService {
         const query = processDefinitionId
             ? `processDefinitionId=${processDefinitionId!}`
             : `processDefinitionKey=${processDefinitionKey!}`;
-        return await fetch(`${ADDRESS()}/rest/job?${query}&withException=true`, requestOptions)
+        return await fetch(`${preUrl}/rest/job?${query}&withException=true`, requestOptions)
             .then(response => {
-                if (response.status !== 200) throw `200 status expected, but ${response.status} received; ADDRESS(): ${ADDRESS()}`;
+                if (response.status !== 200) throw `200 status expected, but ${response.status} received; ADDRESS(): ${preUrl}`;
                 return response.json();
             })
             .catch(reason => {
